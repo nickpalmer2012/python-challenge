@@ -31,7 +31,7 @@ with open(bank_data) as bank_file:
         
         changes = profit - prior_profit
         #ignore any month were the prior profit = 0, else add change to change_list
-        if prior_profit is not 0:
+        if prior_profit != 0:
             change_list.append(changes)
         
         total_change += changes
@@ -48,28 +48,23 @@ with open(bank_data) as bank_file:
     minChange = min(change_list)
     #min change position on dataset
     minChange_position = change_list.index(minChange)
-    
 
+#Print results to terminal
 
+print("Financial Analysis")
+print("----------------------------")
+print(f"Total Months: {num_months}")
+print(f"Total: ${total}")
+print(f"Average Change: ${round(avg_change,2)}")
+print(f"Greatest Increase in Profits: {data[maxChange_position][0]} (${maxChange})")
+print(f"Greatest Decrease in Profits: {data[minChange_position][0]} (${minChange})")
 
-
-        
-
-
-    
-    #print(data)
-
-
-#print(num2)
-print(f"Total: ${total:,}")
-print(num_months)
-print(maxChange)
-print(minChange)
-print()
-
-
-#print(avg_change)
-#print(maxChange_position)
-
-
-
+#Print results to .txt file in analysis directory
+with open(('analysis/results.txt'), 'w') as f:
+   f.write("Financial Analysis"'\n')
+   f.write("----------------------------"'\n')
+   f.write(f"Total Months: {num_months}"'\n')
+   f.write(f"Total: ${total}"'\n')
+   f.write(f"Average Change: ${round(avg_change,2)}"'\n')
+   f.write(f"Greatest Increase in Profits: {data[maxChange_position][0]} (${maxChange})"'\n')
+   f.write(f"Greatest Decrease in Profits: {data[minChange_position][0]} (${minChange})"'\n') 
