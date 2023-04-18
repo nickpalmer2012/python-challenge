@@ -6,14 +6,15 @@ bank_data = os.path.join('Resources/budget_data.csv')
 with open(bank_data) as bank_file:
     #Set bank_reader as the reading of budget data csv with a comma as the delimiter
     bank_reader = csv.reader(bank_file,delimiter = ',')
+    
     #adjust bank_reader to read data after header row
     next(bank_reader)
+    
     #create list that has pairs of data that show the profit/loss number next to the corresponding month
     data = list(bank_reader)
     
     #calculate number of months evaluated in data set
     num_months = len(data)
-    #print(num_months)
     
     #Calculate total profit/loss over dataset
     #initialize total variable to 0
@@ -25,7 +26,6 @@ with open(bank_data) as bank_file:
 
     #loop through each row and add profit/loss to running total variable
     for row in data:
-        #month = row[0]
         profit = int(row[1])
         total += profit
         
@@ -34,9 +34,11 @@ with open(bank_data) as bank_file:
         if prior_profit != 0:
             change_list.append(changes)
         
+        #total month to month change over the entire data set. This will be used for average change calculation
         total_change += changes
 
-
+        #sets prior profit variable equal to the profit in the row that is currently being searched
+        #Putting the variable here in the for loop sets the prior profit variable up to be subtracted from the next row's profit, on the for loop's next run 
         prior_profit = profit
 
     avg_change = sum(change_list)/len(change_list)
