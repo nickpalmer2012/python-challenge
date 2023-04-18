@@ -49,22 +49,38 @@ with open(elect_path) as elect_file:
     for i in cand_votes:
        vpercent = round(cand_votes[i]/total_votes * 100, 3)
        percentage[i] = vpercent
-       #print(percentage)
-       #print(cand_votes[i])
 
     win = max(cand_votes, key=cand_votes.get)
 
+    
+    #print results to terminal
     print("Election Results")
     print("----------------------------")
     print(f"Total Votes: {total_votes}")
     print("----------------------------")   
-    #for cand_result in cand_list:
-     #   print(cand_result)
+    #for loop to print candidate results dynamically
     for j in range(0, len(cand_list)):
         print(cand_list[j] + ": " + str(percentage[cand_list[j]]) + "% (" + str(cand_votes[cand_list[j]]) + ")")
     print("----------------------------") 
     print(f"Winner: {win}")
     print("----------------------------")
+
+    #print results to .txt file
+    with open(('analysis/results.txt'), 'w') as f:
+        f.write("Election Results"'\n')
+        f.write("----------------------------"'\n')
+        f.write(f"Total Votes: {total_votes}"'\n')
+        f.write("----------------------------"'\n')
+        #for loop to print candidate results dynamically
+        for k in range(0, len(cand_list)):
+            f.write(cand_list[k] + ": " + str(percentage[cand_list[k]]) + "% (" + str(cand_votes[cand_list[k]]) + ")"'\n')
+        f.write("----------------------------"'\n')
+        f.write(f"Winner: {win}"'\n')
+        f.write("----------------------------")
+
+        
+            
+
 
         
        
